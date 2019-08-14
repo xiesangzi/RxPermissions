@@ -15,7 +15,6 @@
 package com.yhms.permissionx;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.os.Build;
 import android.text.TextUtils;
 
@@ -276,7 +275,7 @@ public class RxPermissions {
      * For SDK &lt; 23, the observable will always emit false.
      */
     @SuppressWarnings("WeakerAccess")
-    public Observable<Boolean> shouldShowRequestPermissionRationale(final Activity activity, final String... permissions) {
+    public Observable<Boolean> shouldShowRequestPermissionRationale(final FragmentActivity activity, final String... permissions) {
         if (!isMarshmallow()) {
             return Observable.just(false);
         }
@@ -284,7 +283,7 @@ public class RxPermissions {
     }
 
     @TargetApi(Build.VERSION_CODES.M)
-    private boolean shouldShowRequestPermissionRationaleImplementation(final Activity activity, final String... permissions) {
+    private boolean shouldShowRequestPermissionRationaleImplementation(final FragmentActivity activity, final String... permissions) {
         for (String p : permissions) {
             if (!isGranted(p) && !activity.shouldShowRequestPermissionRationale(p)) {
                 return false;
